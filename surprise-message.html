@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Surprise Messages</title>
+	<meta charset="UTF-8" />
+	<meta name="description" content="Happy Birthday Mahajan">
+	<meta name="robots" content="index, follow" />
+	<link rel="author" href="" /> 
+    <!-- End of Facebook Meta Tags -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+	<link rel="stylesheet" href="bootstrap.min.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.min.css'>
+	<link rel="stylesheet" href="swiper-style.css">
+
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		.bday-color {
+		  margin: 0;
+		  background: #020202;
+		  cursor: crosshair;
+		  overflow: hidden;
+		}
+		canvas{display:block}
+		h1 {
+		  position: absolute;
+		  top: 20%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  color: #fff;
+		  font-family: 'Source Sans Pro', sans-serif;
+		  font-size: 5em;
+		  font-weight: 900;
+		  -webkit-user-select: none;
+		  user-select: none;
+		  text-align: center;
+		}
+		.ptb60{
+			padding-top: 60px;
+			padding-bottom: 60px;
+		}
+		.fontText-color{
+			position: relative;
+			font-style: italic;
+			color: #000;
+			font-weight: 600;
+			color: #fff;
+		}
+	
+		.cardBg
+		{
+		  background-image: linear-gradient(to right top, #1f0537, #380c60, #55108c, #7413bb, #9612eb);
+		    height: 100%;
+		    margin: 0;
+		    background-repeat: no-repeat;
+		    background-attachment: fixed;
+		}
+		.card {
+			 position: relative;
+			 width: 300px;
+			 height: 425px;
+			 border: 10px solid #9612eb;
+			 margin: 40px auto 0 auto;
+			 box-shadow: inset 10px 0px 15px 0px rgba(0, 0, 0, 0.1);
+		    background-image: linear-gradient(to bottom, rgba(255, 255, 255), rgba(255, 255, 255, 0.7)), url("photo-1527481138388-31827a7c94d5.jfif");
+
+		background-position: center; /* Center the image */
+		  background-repeat: no-repeat; /* Do not repeat the image */
+		  background-size: cover;
+			 background-color: #e6f0e6;
+		}
+		 .card .text-container {
+			 width: 85%;
+			 height: 85%;
+			 margin: auto;
+		}
+		 .strikethrough {
+			 text-decoration: line-through;
+		}
+		 .card .text-container #head {
+			 font-family: 'Nobile', sans-serif;
+			 font-size: 1.5em;
+			 margin: 8px auto 5px auto;
+		}
+		 .card p {
+			 font-size: 16px;
+			 line-height: 1.4;
+			 font-family: 'Nobile';
+			 color: #331717;
+			 font-style: italic;
+			 font-weight: 500;
+			 text-align: center;
+			 margin: 12px auto 0px auto;
+		}
+		 .card .front {
+			 position: absolute;
+			 width: 300px;
+			 height: 100%;
+			 margin: -10px 0px 0px -10px;
+			 border: 10px solid #9612eb;
+			 backface-visibility: hidden;
+			 background-color: #9612eb;
+			/* background-image: url($cover-image);
+			 */
+			 background-size: contain;
+			 transform-style: preserve-3d;
+			 transform-origin: 0% 50%;
+			 transform: perspective(800px) rotateY(0deg);
+			 transition: all 0.8s ease-in-out;
+		}
+		 .card:hover .front {
+			 transform: perspective(800px) rotateY(-170deg);
+			 background-color: #41718d;
+		}
+		 .card:hover .back {
+			 transform: perspective(800px) rotateY(-170deg);
+			 box-shadow: 7px 0px 5px 0px rgba(0, 0, 0, 0.3), inset 2px 0px 15px 0px rgba(0, 0, 0, 0.1);
+			 background-color: #d2dcd2;
+		}
+		 .card .back {
+			 position: absolute;
+			 width: 100%;
+			 height: 100%;
+			 border: 10px solid #9612eb;
+			 margin: -10px 0px 0px -10px;
+			 backface-visibility: visible;
+			 filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, .5));
+			 transform-style: preserve-3d;
+			 transform-origin: 0% 50%;
+			 transform: perspective(800px) rotateY(0deg);
+			 transition: all 0.8s ease-in-out;
+			 background-color: #e6f0e6;
+			 box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.1);
+		}
+
+		.imgset
+		{
+		  position: relative;
+		  z-index: 1;
+		  margin-bottom: -215px;
+		}
+		.imgset img
+		{
+		    box-shadow: 0px 6px 11px 7px rgba(0, 0, 0, 0.22);
+		    border-radius: 5px;
+		}
+		.clear{clear: both;}
+
+		.modal p{
+			font-family: 'Nobile', sans-serif;
+		}
+
+		#scrollDown{
+			position: absolute;
+		    border: 2px solid white;
+		    border-radius: 50px;
+		    width: 25px;
+		    height: 45px;
+		    padding: 2px 0px;
+		    bottom: -10vh;
+		    margin-left: 50%;
+		    transform: translateX(-50%);
+		}
+
+		#scrollDown #rond{
+		  height: 11px;
+		  width: 11px;
+		  border-radius: 50%;
+		  background-color:white;
+		  margin: 0 auto;
+		  animation: anim1 1.5s infinite;
+		}
+
+		@keyframes anim1 {
+		    0%
+		    { 
+		        margin-top: 0px;
+		        opacity: 0;
+		    }
+		    100%
+		    { 
+		        margin-top: 33px;
+		        opacity: 1;
+		    }
+		}
+	</style>
+</head>
+<body>
+	<section class="bday-color">
+		<h1>Happy Birthday</h1>
+		<h1 style="top: 42%;">Mahajan</h1>
+		<h1 style="top: 60%;font-size: 20px;">Scroll Down
+		<div id="scrollDown">
+		    <div id="rond"></div>  
+		 </div>
+		</h1>
+		<canvas id="birthday"></canvas>
+	</section>
+
+	<!-- 3d Slider Start -->
+	<section class="body-swiper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-sm-12 col-xs-12">
+					<div class="swiper-container">
+					  <!-- Additional required wrapper -->
+					  <div class="swiper-wrapper">
+					    <!-- Slides -->
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="https://scontent-del1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s750x750/107380347_153991769629024_9025252385457564336_n.jpg?_nc_ht=scontent-del1-1.cdninstagram.com&_nc_cat=104&_nc_ohc=bbzwJzDBK7UAX8syqCz&oh=c224a9268494ad8728c9f46c79e4efdc&oe=5F3802FA" alt="">
+					      </div>
+					      <div class="detail">
+					        <h3>Dosto Ki Jaan</h3>
+					      </div>
+					    </div>
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="https://scontent-del1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/75484595_123583846025997_1112899044550346433_n.jpg?_nc_ht=scontent-del1-1.cdninstagram.com&_nc_cat=109&_nc_ohc=LZVPhk7N50oAX8-QOeo&oh=7727b3c3ac9cdb3e62671343c5eb2fd5&oe=5F334281" alt="">
+					      </div>
+					      <div class="detail">
+					        <h3>Bold and Smart</h3>
+					      </div>
+					    </div>
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="https://scontent-del1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/101478020_394552634794416_2333518734155457758_n.jpg?_nc_ht=scontent-del1-1.cdninstagram.com&_nc_cat=100&_nc_ohc=DgafEmgYJ8AAX8G3ngb&oh=3fb97e1eef5be14f44a7a755f2084264&oe=5F34E12B" alt="">
+					      </div>					      
+					      <div class="detail">
+					        <h3>Sweet Soul (Be Happy)</h3>
+					      </div>
+					    </div>
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="https://scontent-del1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/100959718_162056131976977_2538668618124399113_n.jpg?_nc_ht=scontent-del1-1.cdninstagram.com&_nc_cat=101&_nc_ohc=7jH-oBafFgMAX93FV6f&oh=4d9be4ecb433bd8118eb8e1d41bdf2f8&oe=5F3203B8" alt="">
+					      </div>
+					      <div class="detail">
+					        <h3>Momma's Girl</h3>
+					      </div>
+					    </div>
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="https://scontent-del1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s640x640/97966433_138041094469203_877530113355803719_n.jpg?_nc_ht=scontent-del1-1.cdninstagram.com&_nc_cat=103&_nc_ohc=2MLssqh_GbIAX9oPM5u&oh=ef8d2bb795cdd863c19cc7150f0f54b8&oe=5F33A722" alt="">
+					      </div>
+					      <div class="detail">
+					        <h3>Siya's Style</h3>
+					      </div>
+					    </div>
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="slider-5.png" alt="">
+					      </div>
+					      <div class="detail">
+					        <h3>Upcoming Star</h3>
+					      </div>
+					    </div>
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="https://scontent-del1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/107893378_317534255918230_6940076587199361607_n.jpg?_nc_ht=scontent-del1-1.cdninstagram.com&_nc_cat=110&_nc_ohc=6OgGgXVse0oAX-lnqH8&oh=e5b6456497bd7ecc4be8123451929b5b&oe=5F36837B" alt="">
+					      </div>
+					      <div class="detail">
+					        <h3>Dreamer</h3>
+					      </div>
+					    </div>
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="https://scontent-del1-1.cdninstagram.com/v/t51.2885-15/e35/s1080x1080/107829624_311212663258295_7687833141631365607_n.jpg?_nc_ht=scontent-del1-1.cdninstagram.com&_nc_cat=111&_nc_ohc=VliYbZzvW7MAX--XJfr&oh=1f604b7d1a4de82ed60816aa55fe77cb&oe=5F347112" alt="">
+					      </div>
+					      <div class="detail">
+					        <h3>Fun Loving (Peace)</h3>
+					      </div>
+					    </div>
+					    <div class="swiper-slide">
+					      <div class="picture">
+					        <img src="https://scontent-del1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/s750x750/106244126_124933649257691_4313190620179812070_n.jpg?_nc_ht=scontent-del1-1.cdninstagram.com&_nc_cat=111&_nc_ohc=bPvH8CKxrXIAX9lj07-&oh=cd5ab2caee498e3cd04845042263f807&oe=5F32A4ED" alt="">
+					      </div>
+					      <div class="detail">
+					        <h3>Swagger</h3>
+					      </div>
+					    </div>
+					  </div>
+					  <!-- If we need pagination -->
+					  <div class="swiper-pagination"></div>
+
+					  <!-- If we need navigation buttons -->
+					  <!--     <div class="swiper-button-prev"></div> -->
+					  <!--     <div class="swiper-button-next"></div> -->
+
+					  <!-- If we need scrollbar -->
+					  <div class="swiper-scrollbar"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- 3d Slider End -->
+
+
+	<section class="ptb60 cardBg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<h1 class="text-center fontText-color">Surprise Messages</h1>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="card">
+					  <div class="back"></div>
+					  <div class="front">
+					    <div class="imgset">
+					         <img width="100%" src="bdycard-1.png">
+					       </div>
+					  </div>
+					  <div class="text-container">
+					    <p id="head">Hey Tigress,</p>
+					    <p>
+					    	I am glad to be close to such a beautiful soul like u. I wish to stick along and witness ur story, the love- the pain- the happiness - the success, all of it!<br><br>Let's blow the candle for your 19th year of beautiful existence on earth. Sending you lots of hugs n kisses. Happy Birthday Shrij 😘
+					    </p>
+					    <p>- Rev</p>
+					    <p style="margin-top: 2px;">
+					    	<a href="https://www.instagram.com/an_anecdotist/" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> an_anecdotist</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="card">
+					  <div class="back"></div>
+					  <div class="front">
+					    <div class="imgset">
+					         <img width="100%" src="bdycard-1.png">
+					       </div>
+					  </div>
+					  <div class="text-container">
+					    <p id="head">Dear Siya,</p>
+					    <p>
+					    	Another adventure filled year awaits you. Welcome it by celebrating your birthday with pomp and splendor. Wishing you a very happy and fun-filled birthday... Siya you are our inspiration...  Our motivator...  Our heart.. Our unicorn 🦄.. Our sunflower 🌻.. We love you so so so much and wish you happy birthday many many happy returns of the day ❤❤🎉🎉 hope you will achieve all the dream you hoped..  🎉🎈🎈❤ 
+					    </p>
+					    <p>- Tan Thakur</p>
+					    <p style="margin-top: 2px;">
+					    	<a href="https://www.instagram.com/_ishq_tan_/" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> _ishq_tan_</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="clear">&nbsp;</div>
+			<div class="clear">&nbsp;</div>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+					<div class="card">
+					  	<div class="back"></div>
+					  	<div class="front">
+						    <div class="imgset">
+						         <img width="100%" src="bdycard-1.png">
+						       </div>
+						  </div>
+					  <div class="text-container">
+					    <p id="head">Hie Mahajan,</p>
+					    <p>
+					    	You don't know me.. I'm one of your followers
+							but yeah i genuinely like you as a person who you are , you inspiring so many people's to speak up...
+							i follow you, sometime trying to talk to you but don't succeeded yet... hahahha..
+							i hope you like it all....
+							wishing you a very happy Birthday Shrija, may god bless you..be happy, be strong, 
+							do whatever you wanted to do in life...
+							you are just awesome..
+							lastly..be safe , stay home and please be My friend...🤩🤩
+					    </p>
+					    <p>- Vinny</p>
+					    <p style="margin-top: 2px;">
+					    	<a href="https://www.instagram.com/quasar_the_star/" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> quasar_the_star</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="clear">&nbsp;</div>
+			<div class="clear">&nbsp;</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="card">
+					  <div class="back"></div>
+					  <div class="front">
+					    <div class="imgset">
+					         <img width="100%" src="bdycard-1.png">
+					       </div>
+					  </div>
+					  <div class="text-container">
+					    <p id="head">Dear Siya,</p>
+					    <p>
+					    	Happiest birthday shrija🎂<br>🎈🕯️🎉💖may God bless you... Enjoy Ur dayyyy.... Siyaaaa also you are beautiful...and your voice is amazing mannn!!!🔥 whenever u come live... I feel happyyyy 😂😂😁 you are just sooo awesome...... also you inspire me so much.<br/>
+					    	<br/>
+					    	<a href="#!" data-toggle="modal" data-target="#ashuGreeting" style="color: #6912aa;"><b>Read More..</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="card">
+					  <div class="back"></div>
+					  <div class="front">
+					    <div class="imgset">
+					         <img width="100%" src="bdycard-1.png">
+					       </div>
+					  </div>
+					  <div class="text-container">
+					    <p id="head">Hey SIYA!!</p>
+					    <p>
+					    	You are a good friend and an even better person. May God bless you with wonderful times ahead and thanks for the friendship we share. We wish you a very Happy and warm birthday 🎂 🎈Your friendship has touched all of us, May you get all you desire. we are so so lucky to come across with a person like you!! <br><br/>
+					    	<a href="#!" data-toggle="modal" data-target="#lasuugreeting" style="color: #6912aa;"><b>Read More..</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="clear">&nbsp;</div>
+			<div class="clear">&nbsp;</div>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+					<div class="card">
+					  	<div class="back"></div>
+					  	<div class="front">
+						    <div class="imgset">
+						         <img width="100%" src="bdycard-1.png">
+						       </div>
+						  </div>
+					  <div class="text-container">
+					    <p id="head">Hi Shrija,</p>
+					    <p>
+					    	Happy birthday to you..<br/>
+					    	Best wishes from a stranger to a teenage role model.<br/>
+					    	Keep going and express yourself as you are...<br/>
+					    	You'll be going to places 🥳<br/>
+					    	Happy birthday again..😇
+					    </p>
+					    <p>- Shubham Gupta</p>
+					    <p style="margin-top: 2px;">
+					    	<a href="https://www.instagram.com/shubh_gupta26/" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> shubh_gupta26</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="clear">&nbsp;</div>
+			<div class="clear">&nbsp;</div>
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="card">
+					  <div class="back"></div>
+					  <div class="front">
+					    <div class="imgset">
+					         <img width="100%" src="bdycard-1.png">
+					       </div>
+					  </div>
+					  <div class="text-container">
+					    <p id="head">Hi...</p>
+					    <p>
+					    	Happy Birthday Siya momo 🥰..
+					    </p>
+					     <p>- Ashish</p>
+					     <p style="margin-top: 2px;">
+					    	<a href="https://www.instagram.com/uglyashish/" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> uglyashish</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+					<div class="card">
+					  <div class="back"></div>
+					  <div class="front">
+					    <div class="imgset">
+					         <img width="100%" src="bdycard-1.png">
+					       </div>
+					  </div>
+					  <div class="text-container">
+					    <p id="head">Hey SIYA!!</p>
+					    <p>
+					    	My cheeky little crush Happy happy birthday! Always remember i will always be your number 1
+					    	 fan and we will support you a 100% 👌 no matter what.
+					    </p>
+					    <p>- yeye</p>
+					     <p style="margin-top: 2px;">
+					    	<a href="https://www.instagram.com/yeyebelle10/" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> yeyebelle10</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="clear">&nbsp;</div>
+			<div class="clear">&nbsp;</div>
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+					<div class="card">
+					  	<div class="back"></div>
+					  	<div class="front">
+						    <div class="imgset">
+						         <img width="100%" src="bdycard-1.png">
+						       </div>
+						  </div>
+					  <div class="text-container">
+					    <p id="head">Dear Siya,</p>
+					    <p>
+					    	And here the day comes, the day when a sweet, kind-hearted, caring girl came to this 
+					    	world to influence the lives of some special people through her words, and the positivity she spreads! I know even after being one of the thousands of your loyal admirer, 
+					    	I can't do something special for you still you'll always be in our
+					    	hearts and i would just say one thing, k <br/>
+					    	"Keep Inspiring"!!<br/>
+					    	Love you and stay safe! ☺️
+					    </p>
+					    <p>- Varun</p>
+					    <p style="margin-top: 2px;">
+					    	<a href="https://www.instagram.com/typicaltallguy/" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> typicaltallguy</b></a>
+					    </p>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="clear">&nbsp;</div>
+			<div class="clear">&nbsp;</div>
+		</div>
+	</section>
+<style type="text/css">
+	#container {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  width: 100%;
+  height: 320px;
+}
+
+h1.h1font {
+	font-size: 1.4em;
+	font-weight: 600;
+	letter-spacing: 3px;
+	padding-top: 15px;
+	color: #8913d8;
+	padding-bottom: 5px;
+	text-transform: uppercase
+}
+
+.green {
+  color: #4ec07d;
+}
+
+.red {
+  color: #e96075;
+}
+
+.alert {
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+
+p.font16 {
+  margin-top: -5px;
+  font-size: 16px;
+  font-weight: 100;
+  color: #5e5e5e;
+  letter-spacing: 1px;
+}
+
+button, .dot {
+  cursor: pointer;
+}
+
+#success-box {
+	position: absolute;
+	width: 40%;
+	height: 100%;
+	left: 0;
+	right: 0;
+	background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);
+	border-radius: 20px;
+	box-shadow: 5px 5px 20px #cbcdd3;
+	perspective: 40px;
+	margin: 0 auto;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #FCFCFC;
+  border-radius: 50%;
+  position: absolute;
+  top: 4%;
+  right: 6%;
+}
+.dot:hover {
+  background: #c9c9c9;
+}
+
+.two {
+  right: 12%;
+  opacity: .5;
+}
+
+.face {
+	position: absolute;
+	width: 22%;
+	height: 22%;
+	background: #FCFCFC;
+	border-radius: 50%;
+	border: 1px solid #777777;
+	top: 18%;
+	left: 37.5%;
+	z-index: 2;
+	animation: bounce 1s ease-in infinite;
+}
+
+.face2 {
+  position: absolute;
+  width: 22%;
+  height: 22%;
+  background: #FCFCFC;
+  border-radius: 50%;
+  border: 1px solid #777777;
+  top: 21%;
+  left: 37.5%;
+  z-index: 2;
+  animation: roll 3s ease-in-out infinite;
+}
+
+.eye {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #777777;
+  border-radius: 50%;
+  top: 40%;
+  left: 20%;
+}
+
+.right {
+  left: 68%;
+}
+
+.mouth {
+  position: absolute;
+  top: 43%;
+  left: 41%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.happy {
+  border: 2px solid;
+  border-color: transparent #777777 #777777 transparent;
+  transform: rotate(45deg);
+}
+
+.sad {
+  top: 49%;
+  border: 2px solid;
+  border-color: #777777 transparent transparent #777777;
+  transform: rotate(45deg);
+}
+
+.shadow {
+	position: absolute;
+	width: 21%;
+	height: 3%;
+	opacity: .5;
+	background: #777777;
+	left: 40%;
+	top: 39%;
+	border-radius: 50%;
+	z-index: 1;
+}
+
+.scale {
+  animation: scale 1s ease-in infinite;
+}
+
+.move {
+  animation: move 3s ease-in-out infinite;
+}
+
+.message {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  height: 40%;
+  top: 47%;
+}
+
+.button-box {
+	position: absolute;
+	background: #FCFCFC;
+	width: 50%;
+	height: 21%;
+	border-radius: 20px;
+	top: 73%;
+	left: 25%;
+	outline: 0;
+	border: none;
+	box-shadow: 2px 2px 10px rgba(119, 119, 119, 0.5);
+	transition: all .5s ease-in-out;
+}
+.button-box:hover {
+  background: #efefef;
+  transform: scale(1.05);
+  transition: all .3s ease-in-out;
+}
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes scale {
+  50% {
+    transform: scale(0.9);
+  }
+}
+@keyframes roll {
+  0% {
+    transform: rotate(0deg);
+    left: 25%;
+  }
+  50% {
+    left: 60%;
+    transform: rotate(168deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    left: 25%;
+  }
+}
+@keyframes move {
+  0% {
+    left: 25%;
+  }
+  50% {
+    left: 60%;
+  }
+  100% {
+    left: 25%;
+  }
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  font-size: 1em;
+  text-transform: uppercase;
+  padding: 10px;
+  font-family: "Lato", sans-serif;
+}
+footer p {
+  color: #EF8D9C;
+  letter-spacing: 2px;
+}
+footer a {
+  color: #B0DB7D;
+  text-decoration: none;
+}
+footer a:hover {
+  color: #FFC39E;
+}
+@media(max-width: 767px){
+	#success-box {
+		width: 100%;
+	}
+}
+@media (min-width: 768px){
+	.modal-dialog {
+	    width: 360px;
+	    margin: 30px auto;
+	}
+}
+
+</style>
+	<section class="ptb60" style="background-color: antiquewhite;">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-xs-12">
+					<div id="container">
+					  <div id="success-box">
+					    <div class="dot"></div>
+					    <div class="dot two"></div>
+					    <div class="face">
+					      <div class="eye"></div>
+					      <div class="eye right"></div>
+					      <div class="mouth happy"></div>
+					    </div>
+					    <div class="shadow scale"></div>
+					    <div class="message"><h1 class="alert h1font">Party Time...</h1><p class="font16">Make a Wish !!!</p></div>
+					    <a href="party-page.html" id="partyMusic" class="button-box"><h1 class="green h1font">Let's Nacho...</h1></a>
+					  </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+
+	<audio class="song" style="visibility: hidden;" controls loop>
+        <source src="sgbirtday.mp3"></source>
+	   Your browser isn't invited for super fun audio time.
+    </audio>
+
+	<!-- Modal -->
+	<div class="modal fade" id="ashuGreeting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-body" style="position: relative;border-radius: 6px;height: 425px;border: 10px solid #9612eb;margin: 0px auto 0 auto;box-shadow: inset 10px 0px 15px 0px rgba(0, 0, 0, 0.1);background-image: linear-gradient(to bottom, rgba(255, 255, 255), rgba(255, 255, 255, 0.7)), url(photo-1527481138388-31827a7c94d5.jfif);background-position: center;background-repeat: no-repeat;background-size: cover;background-color: #e6f0e6;">
+	        		<p> Your confidence and positivity spreads like anything... 💯I earn my confidence from that. Your vds are not only interesting but so relatable. You are really really special for me... Happy bday again...... 😉😉 You are special...💖 Love uh😁💖💖</p>
+	        		<p>- ashu</p>
+				    <p style="margin-top: 2px;">
+				    	<a href="https://www.instagram.com/ashhhhuuuuuuuu/?igshid=io47kyzjdkdx" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> ashhhhuuuuuuuu</b></a>
+				    </p>
+	      		</div>
+	    	</div>
+	    </div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="lasuugreeting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+	      		<div class="modal-body" style="position: relative;border-radius: 6px;height: 425px;border: 10px solid #9612eb;margin: 0px auto 0 auto;box-shadow: inset 10px 0px 15px 0px rgba(0, 0, 0, 0.1);background-image: linear-gradient(to bottom, rgba(255, 255, 255), rgba(255, 255, 255, 0.7)), url(photo-1527481138388-31827a7c94d5.jfif);background-position: center;background-repeat: no-repeat;background-size: cover;background-color: #e6f0e6;">
+	        		<p> Thanks to that "zoom  meeting" we got a chance to have an interaction and met our pride fam!! I hope someday, we will get to meet each other in real soon, till then do take care, and keep doing what you  are doing rn as in inspiring people! Lots of love and virtual  hugs and kisses to you 💖🤗</p>
+	        		<p>- From: Lasu and kampo😚</p>
+				    <p style="margin-top: 2px;">
+				    	<a href="https://www.instagram.com/its_lasuu/?igshid=yj3fpm4vzc79" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> its_lasuu</b></a>
+				    	and
+				    	<a href="https://www.instagram.com/kampocynt/?igshid=8phjkqudg2yq" target="_blank" style="color: #6912aa;"><img src="instagram.png" alt="instagram.png"><b> kampocynt </b></a>
+				    </p>
+	      		</div>
+	    	</div>
+	    </div>
+	</div>
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+	<script src="effect.js"></script>
+
+	 <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js'></script><script  src="swiper-script.js"></script>
+
+	<script type="text/javascript">
+		// helper functions
+		const PI2 = Math.PI * 2
+		const random = (min, max) => Math.random() * (max - min + 1) + min | 0
+		const timestamp = _ => new Date().getTime()
+
+		// container
+		class Birthday {
+		  constructor() {
+		    this.resize()
+
+		    // create a lovely place to store the firework
+		    this.fireworks = []
+		    this.counter = 0
+
+		  }
+		  
+		  resize() {
+		    this.width = canvas.width = window.innerWidth
+		    let center = this.width / 2 | 0
+		    this.spawnA = center - center / 4 | 0
+		    this.spawnB = center + center / 4 | 0
+		    
+		    this.height = canvas.height = window.innerHeight
+		    this.spawnC = this.height * .1
+		    this.spawnD = this.height * .5
+		    
+		  }
+		  
+		  onClick(evt) {
+		     let x = evt.clientX || evt.touches && evt.touches[0].pageX
+		     let y = evt.clientY || evt.touches && evt.touches[0].pageY
+		     
+		     let count = random(3,5)
+		     for(let i = 0; i < count; i++) this.fireworks.push(new Firework(
+		        random(this.spawnA, this.spawnB),
+		        this.height,
+		        x,
+		        y,
+		        random(0, 260),
+		        random(30, 110)))
+		          
+		     this.counter = -1
+		     
+		  }
+		  
+		  update(delta) {
+		    ctx.globalCompositeOperation = 'hard-light'
+		    ctx.fillStyle = `rgba(20,20,20,${ 7 * delta })`
+		    ctx.fillRect(0, 0, this.width, this.height)
+
+		    ctx.globalCompositeOperation = 'lighter'
+		    for (let firework of this.fireworks) firework.update(delta)
+
+		    // if enough time passed... create new new firework
+		    this.counter += delta * 3 // each second
+		    if (this.counter >= 1) {
+		      this.fireworks.push(new Firework(
+		        random(this.spawnA, this.spawnB),
+		        this.height,
+		        random(0, this.width),
+		        random(this.spawnC, this.spawnD),
+		        random(0, 360),
+		        random(30, 110)))
+		      this.counter = 0
+		    }
+
+		    // remove the dead fireworks
+		    if (this.fireworks.length > 1000) this.fireworks = this.fireworks.filter(firework => !firework.dead)
+
+		  }
+		}
+
+		class Firework {
+		  constructor(x, y, targetX, targetY, shade, offsprings) {
+		    this.dead = false
+		    this.offsprings = offsprings
+
+		    this.x = x
+		    this.y = y
+		    this.targetX = targetX
+		    this.targetY = targetY
+
+		    this.shade = shade
+		    this.history = []
+		  }
+		  update(delta) {
+		    if (this.dead) return
+
+		    let xDiff = this.targetX - this.x
+		    let yDiff = this.targetY - this.y
+		    if (Math.abs(xDiff) > 3 || Math.abs(yDiff) > 3) { // is still moving
+		      this.x += xDiff * 2 * delta
+		      this.y += yDiff * 2 * delta
+
+		      this.history.push({
+		        x: this.x,
+		        y: this.y
+		      })
+
+		      if (this.history.length > 20) this.history.shift()
+
+		    } else {
+		      if (this.offsprings && !this.madeChilds) {
+		        
+		        let babies = this.offsprings / 2
+		        for (let i = 0; i < babies; i++) {
+		          let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0
+		          let targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies) | 0
+
+		          birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0))
+
+		        }
+
+		      }
+		      this.madeChilds = true
+		      this.history.shift()
+		    }
+		    
+		    if (this.history.length === 0) this.dead = true
+		    else if (this.offsprings) { 
+		        for (let i = 0; this.history.length > i; i++) {
+		          let point = this.history[i]
+		          ctx.beginPath()
+		          ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)'
+		          ctx.arc(point.x, point.y, 1, 0, PI2, false)
+		          ctx.fill()
+		        } 
+		      } else {
+		      ctx.beginPath()
+		      ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)'
+		      ctx.arc(this.x, this.y, 1, 0, PI2, false)
+		      ctx.fill()
+		    }
+
+		  }
+		}
+
+		let canvas = document.getElementById('birthday')
+		let ctx = canvas.getContext('2d')
+
+		let then = timestamp()
+
+		let birthday = new Birthday
+		window.onresize = () => birthday.resize()
+		document.onclick = evt => birthday.onClick(evt)
+		document.ontouchstart = evt => birthday.onClick(evt)
+
+		  ;(function loop(){
+		  	requestAnimationFrame(loop)
+
+		  	let now = timestamp()
+		  	let delta = now - then
+
+		    then = now
+		    birthday.update(delta / 1000)
+		  	
+
+		  })()
+	</script>
+	
+</body>
+</html>
